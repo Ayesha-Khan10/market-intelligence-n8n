@@ -1,0 +1,768 @@
+{
+  "name": "Market Intelligence & Opportunity Gap Finder",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1104,
+        -64
+      ],
+      "id": "b766d276-33b8-46b7-99b4-36a0175f888e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2abc3101-dbc9-409e-bb94-a4f32daad37b",
+              "leftValue": "={{ $json.mergedData }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        16,
+        320
+      ],
+      "id": "d0b6d5e7-4e41-479a-8686-01f7813c05e1",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -352,
+        736
+      ],
+      "id": "16c5813b-773d-490b-8bf4-a41797faf50a",
+      "name": "Schedule Trigger1"
+    },
+    {
+      "parameters": {
+        "numberInputs": 4
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -432,
+        304
+      ],
+      "id": "c5f57b3c-fe6b-43eb-8bd1-bae69c80e75b",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "content": "📥 DATA COLLECTION",
+        "height": 912,
+        "width": 624,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1136,
+        -256
+      ],
+      "id": "d9639260-aafb-494f-a5cd-fd4f31542f67",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "⚙️ PROCESSING & FILTERING",
+        "height": 528,
+        "width": 374
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        -32
+      ],
+      "id": "067f5e57-4475-401c-8c70-73d74d37990c",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "🤖 AI ANALYSIS",
+        "height": 528,
+        "width": 368,
+        "color": "#F09B56"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -32
+      ],
+      "id": "fc75cbdd-ec1e-4903-889b-2b1cc50d854a",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "📤 OUTPUT & LOGGING",
+        "height": 512,
+        "width": 608,
+        "color": "#66E597"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        416,
+        -32
+      ],
+      "id": "73b1db11-a9cf-420c-85d0-099a7ffdf971",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "url": "https://www.geo.tv/rss/1",
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -656,
+        -256
+      ],
+      "id": "c3d9dc77-de9b-4c2c-9dd6-a0708bf1925e",
+      "name": "Geo News RSS"
+    },
+    {
+      "parameters": {
+        "url": "https://propakistani.pk/feed/",
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -656,
+        512
+      ],
+      "id": "48702b07-9c44-4b2e-9886-ab4d125f859b",
+      "name": "ProPakistani RSS"
+    },
+    {
+      "parameters": {
+        "url": "https://profit.com.pk/feed/",
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -656,
+        320
+      ],
+      "id": "465a686c-d304-4d71-a5a8-a040dd0fa174",
+      "name": "Profit PK RSS"
+    },
+    {
+      "parameters": {
+        "url": "https://newsdata.io/api/1/news?apikey=pub_dbc22516d3ae4d26affc9aeaaefd91c5&country=pk&language=en&category=business",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -656,
+        -64
+      ],
+      "id": "e824e629-1f2b-43d6-adb2-964b55c60003",
+      "name": "NewsData API"
+    },
+    {
+      "parameters": {
+        "url": "https://open.er-api.com/v6/latest/PKR",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -656,
+        128
+      ],
+      "id": "9ce46bf8-fcf4-4c6c-ab87-c003c868f2e0",
+      "name": "PKR Exchange Rate"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app8w69A99RZx8vHd",
+          "mode": "list",
+          "cachedResultName": "Market Intelligence",
+          "cachedResultUrl": "https://airtable.com/app8w69A99RZx8vHd"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblDuYRyH7kYxQWhp",
+          "mode": "list",
+          "cachedResultName": "Competitor Data",
+          "cachedResultUrl": "https://airtable.com/app8w69A99RZx8vHd/tblDuYRyH7kYxQWhp"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        -880,
+        -64
+      ],
+      "id": "684e2fe6-cd17-4595-8a63-7141f2dc43d7",
+      "name": "Load Competitors",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ajXxP1DE0WXoW0VW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nlet allArticles = '';\n\nfor (const item of items) {\n  const raw = item.json.data || item.json.body || item.json.content || '';\n  if (!raw) continue;\n\n  // Extract <item> blocks from RSS XML\n  const matches = raw.match(/<item>([\\s\\S]*?)<\\/item>/g) || [];\n\n  for (const entry of matches.slice(0, 5)) { // 5 articles per source\n    const title   = (entry.match(/<title><!\\[CDATA\\[(.*?)\\]\\]><\\/title>/)   || entry.match(/<title>(.*?)<\\/title>/))?.[1]   || '';\n    const desc    = (entry.match(/<description><!\\[CDATA\\[(.*?)\\]\\]><\\/description>/) || entry.match(/<description>(.*?)<\\/description>/))?.[1] || '';\n    const link    = (entry.match(/<link>(.*?)<\\/link>/))?.[1] || '';\n    const pubDate = (entry.match(/<pubDate>(.*?)<\\/pubDate>/))?.[1] || '';\n\n    if (title) {\n      allArticles += `TITLE: ${title}\\n`;\n      allArticles += `DATE: ${pubDate}\\n`;\n      allArticles += `SUMMARY: ${desc.replace(/<[^>]+>/g, '').slice(0, 200)}\\n`;\n      allArticles += `---\\n`;\n    }\n  }\n}\n\nconst competitors = $('Load Competitors').all().map(r => {\n  const f = r.json.fields;\n  return `${f.Competitor}: ${f.Service}, Price: ${f.Price}, Delivery: ${f['Delivery Speed']}, Unique: ${f['Unique Feature']}`;\n}).join('\\n');\n\nconst mergedData = `COMPETITOR DATA:\\n${competitors}\\n\\nLATEST NEWS:\\n${allArticles}`;\n\nreturn [{ json: { mergedData } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -208,
+        320
+      ],
+      "id": "b394b6a2-4d88-43fa-8191-190fe406a6b7",
+      "name": "Merge & Format Data"
+    },
+    {
+      "parameters": {
+        "jsCode": "const aiText = $('Groq AI Analysis').first().json.choices[0].message.content;\nconst today = new Date().toLocaleDateString('en-PK', {\n  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'\n});\n\n// ── Markdown → HTML converter ──────────────────────────────────────────────\nfunction markdownToHtml(text) {\n  if (!text) return '';\n  const lines = text.split('\\n');\n  let html = '';\n  let inTable = false;\n  let tableRows = [];\n\n  const flushTable = () => {\n    if (!tableRows.length) return;\n    let t = '<table style=\"width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;\">';\n    tableRows.forEach((row, i) => {\n      const cells = row.split('|').map(c => c.trim()).filter(c => c);\n      if (!cells.length) return;\n      const tag = i === 0 ? 'th' : 'td';\n      const bg  = i === 0 ? '#1e3a5f' : (i % 2 === 0 ? '#f8fafc' : '#ffffff');\n      const col = i === 0 ? '#ffffff' : '#000000';\n      const fw  = i === 0 ? '600' : '400';\n      t += '<tr>' + cells.map(c =>\n        `<${tag} style=\"padding:10px 12px;border:1px solid #dde4ed;background:${bg};color:${col};font-weight:${fw};text-align:left;\">${c}</${tag}>`\n      ).join('') + '</tr>';\n    });\n    t += '</table>';\n    html += t;\n    tableRows = [];\n    inTable = false;\n  };\n\n  for (const raw of lines) {\n    const line = raw.trim();\n\n    // separator row (---|---) — skip\n    if (/^\\|?[\\s\\-|:]+\\|?$/.test(line) && line.includes('-')) continue;\n\n    // table row\n    if (line.startsWith('|') && line.endsWith('|')) {\n      inTable = true;\n      tableRows.push(line.slice(1, -1));\n      continue;\n    }\n\n    // flush table when non-table line encountered\n    if (inTable) flushTable();\n\n    if (!line) { html += '<br>'; continue; }\n\n    // headings\n    if (/^#{1,3}\\s/.test(line)) {\n      const lvl = line.match(/^#+/)[0].length;\n      const txt = line.replace(/^#+\\s+/, '');\n      const sz  = lvl === 1 ? '18px' : lvl === 2 ? '15px' : '14px';\n      html += `<p style=\"font-size:${sz};font-weight:700;color:#1e3a5f;margin:14px 0 6px;\">${txt}</p>`;\n      continue;\n    }\n\n    // bullet points\n    if (/^[-*•]\\s/.test(line)) {\n      let item = line.replace(/^[-*•]\\s+/, '');\n      item = item.replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>');\n      html += `<div style=\"display:flex;gap:8px;margin:5px 0;font-size:14px;line-height:1.7;\">\n        <span style=\"color:#2d6a9f;font-weight:700;flex-shrink:0;\">•</span>\n        <span>${item}</span></div>`;\n      continue;\n    }\n\n    // numbered list\n    if (/^\\d+\\.\\s/.test(line)) {\n      const num = line.match(/^\\d+/)[0];\n      let item  = line.replace(/^\\d+\\.\\s+/, '');\n      item = item.replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>');\n      html += `<div style=\"display:flex;gap:8px;margin:5px 0;font-size:14px;line-height:1.7;\">\n        <span style=\"color:#2d6a9f;font-weight:700;flex-shrink:0;min-width:18px;\">${num}.</span>\n        <span>${item}</span></div>`;\n      continue;\n    }\n\n    // normal paragraph — convert inline bold\n    let para = line.replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>');\n    html += `<p style=\"font-size:14px;line-height:1.8;margin:5px 0;color:#000000;\">${para}</p>`;\n  }\n\n  if (inTable) flushTable();\n  return html;\n}\n// ──────────────────────────────────────────────────────────────────────────\n\n// Split AI response into sections\nconst sections = { intelligence: '', gaps: '', action: '', advantage: '' };\nconst lines = aiText.split('\\n');\nlet current = '';\n\nfor (const line of lines) {\n  if (line.includes('MARKET INTELLIGENCE'))  { current = 'intelligence'; continue; }\n  if (line.includes('OPPORTUNITY GAP'))       { current = 'gaps';         continue; }\n  if (line.includes('SUGGESTED ACTION'))      { current = 'action';       continue; }\n  if (line.includes('COMPETITIVE ADVANTAGE')) { current = 'advantage';    continue; }\n  if (current && line.trim()) sections[current] += line + '\\n';\n}\n\n// Convert each section\nconst intel     = markdownToHtml(sections.intelligence || aiText);\nconst gaps      = markdownToHtml(sections.gaps);\nconst action    = markdownToHtml(sections.action);\nconst advantage = markdownToHtml(sections.advantage);\n\nconst htmlReport = `<!DOCTYPE html>\n<html>\n<head>\n<meta name=\"color-scheme\" content=\"light\">\n<meta name=\"supported-color-schemes\" content=\"light\">\n<style>\n  * { margin:0; padding:0; box-sizing:border-box; }\n  body { font-family:'Segoe UI',Arial,sans-serif; background-color:#f0f4f8; padding:30px 20px; color:#000000; }\n  .wrapper { max-width:680px; margin:auto; }\n  .header { background:linear-gradient(135deg,#1e3a5f,#2d6a9f); border-radius:16px 16px 0 0; padding:40px 40px 35px; text-align:center; }\n  .header .logo { font-size:13px; font-weight:600; letter-spacing:3px; color:#7eb8e8; text-transform:uppercase; margin-bottom:12px; }\n  .header h1 { color:#ffffff; font-size:28px; font-weight:700; margin-bottom:8px; }\n  .header .date { color:#a8cce8; font-size:14px; margin-bottom:16px; }\n  .header .badge { display:inline-block; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:#ffffff; padding:6px 18px; border-radius:20px; font-size:12px; letter-spacing:1px; }\n  .body { background-color:#ffffff; }\n  .stats-row { display:flex; gap:12px; padding:24px 40px; background-color:#f8fafc; }\n  .stat-card { flex:1; background-color:#ffffff; border-radius:10px; padding:16px; text-align:center; border:1px solid #e8eef5; }\n  .stat-label { font-size:11px; color:#666666; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }\n  .stat-value { font-size:18px; font-weight:700; color:#1e3a5f; }\n  .section { padding:28px 40px; border-bottom:1px solid #f0f4f8; background-color:#ffffff; }\n  .section-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }\n  .section-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }\n  .icon-blue { background:#e8f1fb; }\n  .icon-orange { background:#fff4e6; }\n  .icon-green { background:#e8f8f0; }\n  .icon-purple { background:#f3eefb; }\n  .section-title { font-size:16px; font-weight:700; color:#000000; }\n  .section-subtitle { font-size:12px; color:#666666; margin-top:2px; }\n  .action-box { background-color:#eef6fd; border-left:4px solid #2d6a9f; border-radius:8px; padding:20px; }\n  .advantage-box { background-color:#eefaf3; border-left:4px solid #27ae60; border-radius:8px; padding:20px; }\n  .footer { background:#1e3a5f; border-radius:0 0 16px 16px; padding:28px 40px; text-align:center; }\n  .footer .brand { color:#ffffff; font-size:16px; font-weight:700; margin-bottom:6px; }\n  .footer .tagline { color:#7eb8e8; font-size:12px; margin-bottom:12px; }\n  .footer .powered { color:#4a7aa8; font-size:11px; letter-spacing:1px; }\n  .footer .dots { color:#2d6a9f; margin:0 6px; }\n</style>\n</head>\n<body>\n<div class=\"wrapper\">\n  <div class=\"header\">\n    <div class=\"logo\">Market Intelligence System</div>\n    <h1>Daily Market Report</h1>\n    <div class=\"date\">${today}</div>\n    <span class=\"badge\">Auto-Generated Report</span>\n  </div>\n  <div class=\"body\">\n    <div class=\"stats-row\">\n      <div class=\"stat-card\"><div class=\"stat-label\">Competitors</div><div class=\"stat-value\">5</div></div>\n      <div class=\"stat-card\"><div class=\"stat-label\">Data Sources</div><div class=\"stat-value\">4</div></div>\n      <div class=\"stat-card\"><div class=\"stat-label\">Frequency</div><div class=\"stat-value\">Daily</div></div>\n      <div class=\"stat-card\"><div class=\"stat-label\">Market</div><div class=\"stat-value\">Pakistan</div></div>\n    </div>\n    <div class=\"section\">\n      <div class=\"section-header\">\n        <div class=\"section-icon icon-blue\">📊</div>\n        <div><div class=\"section-title\">Market Intelligence</div><div class=\"section-subtitle\">What is happening in the market right now</div></div>\n      </div>\n      ${intel}\n    </div>\n    <div class=\"section\">\n      <div class=\"section-header\">\n        <div class=\"section-icon icon-orange\">🔍</div>\n        <div><div class=\"section-title\">Opportunity Gaps</div><div class=\"section-subtitle\">What competitors are NOT offering</div></div>\n      </div>\n      ${gaps}\n    </div>\n    <div class=\"section\">\n      <div class=\"section-header\">\n        <div class=\"section-icon icon-green\">🚀</div>\n        <div><div class=\"section-title\">Suggested Action</div><div class=\"section-subtitle\">Your business opportunity for today</div></div>\n      </div>\n      <div class=\"action-box\">${action}</div>\n    </div>\n    <div class=\"section\">\n      <div class=\"section-header\">\n        <div class=\"section-icon icon-purple\">⚡</div>\n        <div><div class=\"section-title\">Competitive Advantage</div><div class=\"section-subtitle\">How to win against existing players</div></div>\n      </div>\n      <div class=\"advantage-box\">${advantage}</div>\n    </div>\n  </div>\n  <div class=\"footer\">\n    <div class=\"brand\">Market Intelligence System</div>\n    <div class=\"tagline\">Automated daily insights for the Pakistani e-commerce market</div>\n    <div class=\"powered\">Groq AI <span class=\"dots\">•</span> Airtable <span class=\"dots\">•</span> ARY News <span class=\"dots\">•</span> n8n Automation</div>\n  </div>\n</div>\n</body>\n</html>`;\n\nreturn [{ json: { reportText: aiText, reportHTML: htmlReport, reportDate: today } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        464,
+        320
+      ],
+      "id": "b9c24081-2ce3-4fbe-a121-5522c6b150be",
+      "name": "Generate HTML Report"
+    },
+    {
+      "parameters": {
+        "sendTo": "ayeshakhanj99@gmail.com",
+        "subject": "=Market Intelligence Report — {{ $json.reportDate }}",
+        "message": "={{ $json.reportHTML }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        688,
+        320
+      ],
+      "id": "6b6beed4-6b36-4e69-b212-b252ea6d4896",
+      "name": "Email Report",
+      "webhookId": "2b000bb9-bc02-4c25-8e1d-30137b5b4ac8",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "59YbLAgXhqLvsBVJ",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app8w69A99RZx8vHd",
+          "mode": "list",
+          "cachedResultName": "Market Intelligence",
+          "cachedResultUrl": "https://airtable.com/app8w69A99RZx8vHd"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblfqF8knjNN2Qxqg",
+          "mode": "list",
+          "cachedResultName": "Report Log",
+          "cachedResultUrl": "https://airtable.com/app8w69A99RZx8vHd/tblfqF8knjNN2Qxqg"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Report Date": "={{ $('Generate HTML Report').first().json.reportDate }}",
+            "AI Report": "={{ $('Generate HTML Report').first().json.reportText }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Report Date",
+              "displayName": "Report Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "AI Report",
+              "displayName": "AI Report",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        912,
+        320
+      ],
+      "id": "5efa9b73-fd06-499a-aca7-c577e20976ad",
+      "name": "Log to Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ajXxP1DE0WXoW0VW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const today = new Date().toLocaleDateString('en-PK');\n\nconst competitors = [\n  {\n    json: {\n      Competitor: 'Daraz',\n      Service: 'E-commerce & retail delivery',\n      Price: 'High',\n      'Delivery Speed': '3-5 days',\n      'Unique Feature': 'Largest product catalog in Pakistan, Daraz Mall verified sellers',\n      'Date Added': today\n    }\n  },\n  {\n    json: {\n      Competitor: 'Bykea',\n      Service: 'Bike ride & parcel delivery',\n      Price: 'Low',\n      'Delivery Speed': '1-2 hours',\n      'Unique Feature': 'Cash on delivery, affordable intercity delivery, bike taxis',\n      'Date Added': today\n    }\n  },\n  {\n    json: {\n      Competitor: 'Foodpanda',\n      Service: 'Food & grocery delivery',\n      Price: 'Medium',\n      'Delivery Speed': '30-45 min',\n      'Unique Feature': 'Pandamart grocery, wide restaurant network, deals & discounts',\n      'Date Added': today\n    }\n  },\n  {\n    json: {\n      Competitor: 'Careem',\n      Service: 'Ride hailing & delivery',\n      Price: 'Medium-High',\n      'Delivery Speed': '20-40 min',\n      'Unique Feature': 'Careem NOW grocery delivery, professional drivers, corporate accounts',\n      'Date Added': today\n    }\n  },\n  {\n    json: {\n      Competitor: 'Rider',\n      Service: 'Last mile logistics',\n      Price: 'Low-Medium',\n      'Delivery Speed': 'Same day',\n      'Unique Feature': 'B2B focused, bulk delivery for businesses, real-time tracking',\n      'Date Added': today\n    }\n  }\n];\n\nreturn competitors;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -144,
+        736
+      ],
+      "id": "27d47dfe-62c7-4af4-8cc7-83def310bd57",
+      "name": "Seed Competitor Data"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app8w69A99RZx8vHd",
+          "mode": "list",
+          "cachedResultName": "Market Intelligence",
+          "cachedResultUrl": "https://airtable.com/app8w69A99RZx8vHd"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblDuYRyH7kYxQWhp",
+          "mode": "list",
+          "cachedResultName": "Competitor Data",
+          "cachedResultUrl": "https://airtable.com/app8w69A99RZx8vHd/tblDuYRyH7kYxQWhp"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Competitor": "={{ $json.Competitor }}",
+            "Service": "={{ $json.Service }}",
+            "Price": "={{ $json.Price }}",
+            "Delivery Speed": "={{ $json['Delivery Speed'] }}",
+            "Unique Feature": "={{ $json['Unique Feature'] }}",
+            "Date Added": "={{ $json['Date Added'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Competitor",
+              "displayName": "Competitor",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Service",
+              "displayName": "Service",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Price",
+              "displayName": "Price",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Delivery Speed",
+              "displayName": "Delivery Speed",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Unique Feature",
+              "displayName": "Unique Feature",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Date Added",
+              "displayName": "Date Added",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        64,
+        736
+      ],
+      "id": "5b06dfda-2fd2-45da-8beb-f2e315f40f47",
+      "name": "Write to Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ajXxP1DE0WXoW0VW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "🗄️ COMPETITOR DATABASE SEEDER",
+        "height": 224,
+        "width": 704,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        672
+      ],
+      "id": "09801300-0b3f-4c77-9718-3b8d1fb08951",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "🧠 MARKET INTELLIGENCE & OPPORTUNITY GAP FINDER\nAutomated competitor monitoring for Pakistani e-commerce market\nBuilt with n8n • Groq AI • Airtable • RSS Feeds",
+        "height": 1392,
+        "width": 2288,
+        "color": "#031C30"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1184,
+        -384
+      ],
+      "id": "d5b5ed4d-1b6a-4683-902e-4d4754c92e0f",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"model\": \"openai/gpt-oss-20b\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a senior market intelligence analyst for Pakistan.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Analyze the Pakistani delivery and e-commerce market in 2026. Competitors: Daraz (high price, 3-5 days, e-commerce), Bykea (low price, 1-2 hours, bike delivery), Foodpanda (medium price, 30-45 min, food), Careem (medium-high, 20-40 min, rides), Rider (low-medium, same day, B2B logistics). PKR is weakening against USD. Mobile internet users growing rapidly. Provide: MARKET INTELLIGENCE: 3 bullets. OPPORTUNITY GAPS: 3 bullets. SUGGESTED ACTION: one specific opportunity. COMPETITIVE ADVANTAGE: how to win.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        240,
+        320
+      ],
+      "id": "fc860648-a876-4dba-a57a-26657e0b4aaa",
+      "name": "Groq AI Analysis",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "wQN7Rh9Yiw0mjRnF",
+          "name": "Header Auth account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Load Competitors",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Groq AI Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Seed Competitor Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Merge & Format Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Geo News RSS": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "ProPakistani RSS": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Profit PK RSS": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Competitors": {
+      "main": [
+        [
+          {
+            "node": "Geo News RSS",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "NewsData API",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "PKR Exchange Rate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge & Format Data": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate HTML Report": {
+      "main": [
+        [
+          {
+            "node": "Email Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Report": {
+      "main": [
+        [
+          {
+            "node": "Log to Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Seed Competitor Data": {
+      "main": [
+        [
+          {
+            "node": "Write to Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq AI Analysis": {
+      "main": [
+        [
+          {
+            "node": "Generate HTML Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NewsData API": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "PKR Exchange Rate": {
+      "main": [
+        [
+          {
+            "node": "Merge & Format Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d316c96e-8477-47bd-938e-45f7ab32f5e9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1616cb8fadeb67a4cb57b1e1057511faab4fc59a2d73c5a520b4e40a20c13d42"
+  },
+  "nodeGroups": [],
+  "id": "V87eQ9nZ5chlpSlg",
+  "tags": []
+}
